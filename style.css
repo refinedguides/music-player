@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600&display=swap");
+
+:root {
+  --main-color: #885a89;
+  --dark-color: #363537;
+  --light-color: #fff;
+  --gray-color: #efefef;
+  --width: 320px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Gabarito", sans-serif;
+}
+
+body {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  background-color: var(--main-color);
+  color: var(--dark-color);
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--dark-color);
+}
+
+button:active,
+button:hover {
+  color: var(--main-color);
+}
+
+input {
+  appearance: none;
+  background-color: var(--gray-color);
+  outline: none;
+  cursor: pointer;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* firefox */
+input::-moz-range-thumb {
+  appearance: none;
+  width: 0;
+  height: 0;
+  box-shadow: calc(-1 * var(--width)) 0 0 var(--width) var(--main-color);
+}
+
+/* webkit */
+input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+  box-shadow: calc(-1 * var(--width)) 0 0 var(--width) var(--main-color);
+}
+
+.player {
+  background-color: var(--light-color);
+  width: 90%;
+  max-width: var(--width);
+  padding: 20px;
+  border-radius: 10px;
+  display: grid;
+  gap: 20px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.25rem;
+}
+
+.header .bi {
+  font-size: 1.25rem;
+}
+
+.track-info {
+  text-align: center;
+}
+
+.track-info img {
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+}
+
+.track-info .name {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--main-color);
+  margin-block: 20px 5px;
+}
+
+.track-info .artist {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.seek-slider {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.seek-slider input {
+  height: 6px;
+  border-radius: 6px;
+}
+
+.seek-slider span {
+  padding: 5px 0;
+  user-select: none;
+}
+
+.audio-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.audio-controls button {
+  width: 48px;
+  height: 48px;
+  font-size: 3rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-pause.paused .bi::before {
+  content: "\F4F2";
+}
+
+.play-pause:not(.paused) .bi::before {
+  content: "\F4C1";
+}
+
+.volume-slider {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.volume-slider input {
+  height: 3px;
+}
+
+.volume-slider .bi {
+  font-size: 1.25rem;
+}
+
+.playlist {
+  position: absolute;
+  inset: 0;
+  background-color: var(--light-color);
+  padding: 20px;
+  display: grid;
+  align-content: start;
+  gap: 20px;
+  border: 1px solid var(--gray-color);
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.playlist.show {
+  transform: none;
+}
+
+.playlist-header {
+  position: relative;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.playlist-header button {
+  font-size: 1.25rem;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.playlist-content {
+  overflow: hidden auto;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.item:not(:last-child) {
+  border-bottom: 1px solid var(--gray-color);
+}
+
+.item.active,
+.item:hover {
+  background-color: var(--gray-color);
+}
+
+.item:not(.active)::after {
+  content: "";
+  width: 24px;
+  height: 24px;
+}
+
+.item img {
+  width: 48px;
+  height: 48px;
+  border-radius: 3px;
+}
+
+.item div {
+  flex: 1;
+}
+
+.item h4 {
+  font-size: 1rem;
+  color: var(--main-color);
+}
+
+.item p {
+  font-size: 0.85rem;
+}
+
+.item button {
+  width: 24px;
+  height: 24px;
+  line-height: 1;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
