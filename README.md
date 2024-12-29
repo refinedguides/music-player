@@ -22,3 +22,9 @@ A web music player using HTML5 audio element with Javascript.
 ### Screenshot
 
 ![Javascript Music Player](https://raw.githubusercontent.com/refinedguides/music-player/main/screenshot.png)
+
+### Support Me
+
+If you'd like to support me, consider buying me a coffee. Thanks!
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/refinedguides)

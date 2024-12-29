@@ -4,7 +4,7 @@ const state = { activeTrack: 0, initPlay: false };
 
 //* selectors
 
-const audio = document.getElementById("audio-player");
+const audio = new Audio();
 
 const ui = {
   // sliders
@@ -47,12 +47,15 @@ const setupEventListeners = () => {
   audio.addEventListener("timeupdate", updateTime);
   audio.addEventListener("loadedmetadata", updateTrackInfo);
   audio.addEventListener("durationchange", updateDuration);
+  audio.addEventListener("play", updateTrackState);
+  audio.addEventListener("pause", updateTrackState);
 };
 
 //* event handlers
 
 const updateVolume = () => {
   audio.volume = ui.volumeBar.value / 100;
+  audio.muted = audio.volume === 0;
 };
 
 const updateSeek = () => {
@@ -73,13 +76,12 @@ const updateTrackInfo = () => {
   ui.artwork.src = tracks[state.activeTrack].artwork;
   ui.trackName.textContent = tracks[state.activeTrack].name;
   ui.artist.textContent = tracks[state.activeTrack].artist;
+  updateTrackState();
 };
 
 const playPauseTrack = () => {
   audio.paused ? audio.play() : audio.pause();
-  ui.playPauseBtn.classList.toggle("paused", audio.paused);
   if (!state.initPlay) state.initPlay = true;
-  renderPlayList();
 };
 
 const prevTrack = () => {
@@ -103,7 +105,13 @@ const playTrack = (index) => {
 
 const loadTrack = () => {
   audio.src = tracks[state.activeTrack].path;
-  state.initPlay ? playPauseTrack() : renderPlayList();
+  if (state.initPlay) playPauseTrack();
+};
+
+const updateTrackState = () => {
+  console.log("updateTrackState");
+  ui.playPauseBtn.classList.toggle("paused", audio.paused);
+  updateActiveItem();
 };
 
 const formatTime = (time) => {
@@ -121,24 +129,39 @@ const hidePlayList = () => {
   ui.playList.classList.remove("show");
 };
 
+const updateActiveItem = () => {
+  console.log("updateActiveItem");
+  const currentTrackEl = ui.playListContent.querySelector(".active");
+  if (currentTrackEl) {
+    currentTrackEl.classList.remove("active");
+    const button = currentTrackEl.querySelector("button");
+    if (button) button.remove();
+  }
+
+  const targetTrackEl = ui.playListContent.children[state.activeTrack];
+  if (targetTrackEl) {
+    const icon = audio.paused ? "bi-play-fill" : "bi-pause-fill";
+    targetTrackEl.classList.add("active");
+    targetTrackEl.insertAdjacentHTML(
+      "beforeend",
+      `<button><i class="bi ${icon}"></i></button>`
+    );
+  }
+};
+
 const renderPlayList = () => {
   ui.playListContent.innerHTML = "";
 
   tracks.forEach((track, index) => {
-    const isActive = index === state.activeTrack;
-    const icon = audio.paused ? "bi-play-fill" : "bi-pause-fill";
-
     const item = document.createElement("div");
     item.classList.add("item");
-    item.classList.toggle("active", isActive);
     item.addEventListener("click", () => playTrack(index));
     item.innerHTML = `
     <img src="${track.artwork}" alt="${track.name}" />
     <div class="item-detail">
       <h4>${track.name}</h4>
       <p>${track.artist}</p>
-    </div>
-    ${isActive ? `<button><i class="bi ${icon}"></i></button>` : ""}`;
+    </div>`;
 
     ui.playListContent.appendChild(item);
   });

@@ -26,6 +26,7 @@ body {
 button {
   border: none;
   cursor: pointer;
+  outline-color: var(--dark-color);
   background-color: transparent;
   color: var(--dark-color);
 }
@@ -38,7 +39,7 @@ button:hover {
 input {
   appearance: none;
   background-color: var(--gray-color);
-  outline: none;
+  outline-color: var(--dark-color);
   cursor: pointer;
   overflow: hidden;
   width: 100%;
@@ -90,8 +91,8 @@ input::-webkit-slider-thumb {
 }
 
 .track-info img {
-  width: 200px;
-  height: 200px;
+  width: 220px;
+  height: 220px;
   border-radius: 5px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
 }
@@ -115,8 +116,8 @@ input::-webkit-slider-thumb {
 }
 
 .seek-slider input {
-  height: 6px;
-  border-radius: 6px;
+  height: 8px;
+  border-radius: 8px;
 }
 
 .seek-slider span {
@@ -157,7 +158,8 @@ input::-webkit-slider-thumb {
 }
 
 .volume-slider input {
-  height: 3px;
+  height: 6px;
+  border-radius: 6px;
 }
 
 .volume-slider .bi {
@@ -179,6 +181,11 @@ input::-webkit-slider-thumb {
 
 .playlist.show {
   transform: none;
+}
+
+.playlist:not(.show) button {
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .playlist-header {

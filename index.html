@@ -10,6 +10,11 @@
     />
 
     <link rel="stylesheet" href="style.css" />
+    <!-- social links for refinedguides.com -->
+    <script
+      src="https://refinedguides.com/assets/social.js?linkColor=%23fff&textColor=%23363537"
+      defer
+    ></script>
   </head>
   <body>
     <div class="player">
@@ -26,14 +31,17 @@
       </div>
 
       <div class="track-info">
-        <img src="https://placehold.co/200" alt="" class="artwork" />
+        <img
+          src="https://placehold.co/200/363537/FFF?text=Music+Player"
+          alt=""
+          class="artwork"
+        />
         <h2 class="name"></h2>
         <h3 class="artist"></h3>
-        <audio id="audio-player"></audio>
       </div>
 
       <div class="seek-slider">
-        <input type="range" min="1" max="100" value="0" step="0.01" />
+        <input type="range" min="0" max="100" value="0" step="any" />
         <span class="current-time">0:00</span>
         <span class="duration">0:00</span>
       </div>
@@ -54,7 +62,7 @@
 
       <div class="volume-slider">
         <i class="bi bi-volume-off-fill"></i>
-        <input type="range" min="1" max="100" />
+        <input type="range" min="0" max="100" value="35" step="any" />
         <i class="bi bi-volume-up-fill"></i>
       </div>
 
